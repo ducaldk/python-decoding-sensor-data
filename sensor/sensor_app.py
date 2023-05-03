@@ -8,9 +8,22 @@ data = []
 print("Sensor Data App")
 ##############################
 
-# For the debugger situation
+# Unclear how to get the VSCode debug launcher
 import os
-os.chdir("/workspace/projects/pluralsight/python-decoding-sensor-data")
+from pathlib import Path
+mypath = Path(os.getcwd())
+good = False
+for item in mypath.glob("datasets"):
+    if item.is_dir():
+        good = True
+        print(f"{mypath} contains a 'datasets' directory")
+        break
+
+if not good:
+    knowngoodpath = "/workspace/projects/pluralsight/python-decoding-sensor-data"
+    print(f"{mypath} does not contain a 'datasets' directory")
+    print(f"Changing to '{knowngoodpath}'")
+    os.chdir(knowngoodpath)
 
 # Module 1 code here:
 data = load_sensor_data()
